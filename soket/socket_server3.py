@@ -4,6 +4,12 @@ def send_tcp_packet(client_socket, data):
     # Отправляем данные в виде TCP-пакета в ответ
     client_socket.send(data)
 
+def read_serial_number_from_file():
+    # Читаем содержимое файла serial_number.txt
+    with open('serial_number.txt', 'r') as file:
+        serial_number = file.read().strip()
+    return serial_number
+
 def start_server():
     # Создаем TCP-сокет
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -22,8 +28,8 @@ def start_server():
         client_socket, client_address = server_socket.accept()
         print('Получено входящее подключение от:', client_address)
         
-        # Отправляем номер в виде TCP-пакета
-        number = "100000003105FD0211"
+        # Получаем серийный номер из файла
+        number = read_serial_number_from_file()
         ascii_encoded = number.encode('ascii')
         send_tcp_packet(client_socket, ascii_encoded)
         

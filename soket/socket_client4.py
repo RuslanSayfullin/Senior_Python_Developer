@@ -40,7 +40,7 @@ def receive_tcp_packet(server_address, server_port):
         client_socket.close()
 
 if __name__ == '__main__':
-    server_address = '192.168.1.45'
+    server_address = '192.168.1.224'
     server_port = 8001
 
     receive_tcp_packet(server_address, server_port)
